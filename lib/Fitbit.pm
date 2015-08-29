@@ -4,7 +4,6 @@ package Fitbit;
 use LWP::UserAgent;
 use HTTP::Cookies;
 use HTTP::Request::Common;
-#use Data::Dumper;
 use JSON;
 
 sub new {
@@ -16,7 +15,7 @@ sub new {
 	};
 	bless ($self, $class);
 	$self->{ua} = LWP::UserAgent->new;
-	$self->{ua}->agent("Mozilla/10");
+	$self->{ua}->agent("Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0");
 	$self->{jar} = HTTP::Cookies->new(
 		file => $self->{cookiefile},
 		autosave => 1,
@@ -31,7 +30,7 @@ sub login {
 
 	my($rclp,$login_page) = $self->get("https://www.fitbit.com/login");
 
-	return unless $rclp eq '200 OK'; 
+	return unless $rclp eq '200 OK';
 
 	my $login_data = {
 		email => $email,
